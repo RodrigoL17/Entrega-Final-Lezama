@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+ {% block head_title %}Reviews{% endblock head_title%} 
+ {% block header_h1 %}Reviews{% endblock header_h1 %} 
+ {%block main%}
+  {% if reviews %}
+<ul>    
+  {% for review in reviews %}
+  <li>{{review.username}} - {{review.description}} - {{review.rating}} - {{review.created_at}}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No hay Reviews</p>
+{% endif %}
+ {% endblock main %}
