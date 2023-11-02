@@ -2,9 +2,15 @@
  {% block head_title %}Productos{% endblock head_title%} 
  {% block header_h1 %}Productos{% endblock header_h1 %} 
  {%block main%} {% if productos %}
+ <form action="" method="get">
+    {% csrf_token %}
+    <label for="search">Productos: </label>
+    <input type="text" name="search" >
+    <input type="submit" value="Buscar">
+ </form>
 <ul>    
   {% for producto in productos %}
-  <li>{{producto.title}} - {{producto.description}} - {{producto.price}}</li>
+  <li>{{producto.title}} - {{producto.description}} - precio: ${{producto.price}} - stock: {{producto.stock}}</li>
   {% endfor %}
 </ul>
 {% else %}

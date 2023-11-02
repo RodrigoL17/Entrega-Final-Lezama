@@ -8,8 +8,14 @@ def index(request):
 
 
 def productos(request):
-    productos = Producto.objects.all()
-    return render(request, "inicio/productos.html", {"productos": productos})
+    
+    productos = request.GET.get("search")
+    
+    if productos:
+        productos_a_mostrar = Producto.objects.filter(title__icontains=productos)
+    else:
+        productos_a_mostrar = Producto.objects.all()
+    return render(request, "inicio/productos.html", {"productos": productos_a_mostrar})
 
 
 def reviews(request):
