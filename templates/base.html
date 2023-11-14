@@ -23,11 +23,17 @@
             <div class="container">
                 <a class="navbar-brand" href={% url "index" %} >Inicio</a>
                 <a class="navbar-brand" href={% url "productos" %} >Productos</a>
-                <a class="navbar-brand" href={% url "crear_producto" %}>Crear Producto</a>
-                {% comment %} <a class="navbar-brand" href={% url "reviews" %}>Reviews</a> {% endcomment %}
-                <a class="navbar-brand" href={% url "crear_review" %}>Crear Review</a>
-                <a class="navbar-brand" href={% url "crear_category" %}>Crear Categoria</a>
-
+                {% if request.user.is_authenticated %}
+                {% if request.user.datosextra.avatar %}
+                <a href={% url "perfil" %}></a><img src={{request.user.datosextra.avatar.url}} alt="avatar de {{request.user.username}}" width="75">
+                {% else %}
+                <a href={% url "perfil" %}>{{request.user.username}}</a>
+                {% endif %}
+                <a class="btn btn-danger" href={% url "logout" %}>Cerrar Sesion</a>
+                {% else %}
+                <a class="btn btn-primary" href={% url "login" %}>Iniciar Sesion</a>
+                <a class="btn btn-success" href={% url "registrarse" %}>Registrarse</a>
+                {% endif %}
             </div>
         </nav>
         

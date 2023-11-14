@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block head_title %} Producto{% endblock head_title %}
+{% block header_h1 %} Producto{% endblock header_h1 %}
+
+{% block main %}
+<ul>
+    <li>ID: {{producto.id}}</li>
+    <li>Producto: {{producto.title}}</li>
+    <li>Marca: {{producto.brand}}</li>
+    <li>Descripción: {{producto.description}}</li>
+    <li>Precio: ${{producto.price}}</li>
+    <li>Stock: {{producto.stock}}</li>
+    <li>Creado: {{producto.created_at}}</li>
+</ul>
+{% endblock main %}
