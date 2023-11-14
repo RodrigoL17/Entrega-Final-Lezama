@@ -3,7 +3,7 @@
 {% block header_h1 %}Eliminar Producto{% endblock header_h1 %}
 
 {% block main %}
- <form action="" method ="POST">
+ <form action={% url "eliminar_producto" producto.id %} method ="POST">
     {% csrf_token %}
     Desea eliminar el Producto: {{producto.title}}?
     <input type="submit" value="Confirmar">

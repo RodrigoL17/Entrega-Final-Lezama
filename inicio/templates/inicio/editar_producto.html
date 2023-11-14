@@ -3,9 +3,12 @@
 {% block header_h1 %}Editar Producto{% endblock header_h1 %}
 
 {% block main %}
- <form action="" method ="POST">
+ <form action={% url "editar_producto" producto.id %} method ="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{form}}
+    <table>
+      {{form.media}}
+       {{form}}
+    </table>
     <input type="submit" value="Editar">
  </form>
 

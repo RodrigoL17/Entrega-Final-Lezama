@@ -1,8 +1,9 @@
 from django.urls import path
-from inicio.views import index, productos, crear_producto, eliminar_producto, editar_producto, detalle_producto, ListadoDeProductos, CrearProducto, DetalleProducto, EliminarProducto, EditarProducto
+from inicio.views import index,about, productos, crear_producto, eliminar_producto, editar_producto, detalle_producto, ListadoDeProductos, CrearProducto, DetalleProducto, EliminarProducto, EditarProducto
 
 urlpatterns = [
     path('', index, name="index"),
+    path("about/", about, name="about"),
     # path('productos/', productos, name="productos"),
     path("productos/", ListadoDeProductos.as_view(), name="productos"),
     # path("productos/<int:producto_id>/", detalle_producto, name="detalle_producto"),

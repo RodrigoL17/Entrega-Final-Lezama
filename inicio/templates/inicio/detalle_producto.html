@@ -7,9 +7,10 @@
     <li>ID: {{producto.id}}</li>
     <li>Producto: {{producto.title}}</li>
     <li>Marca: {{producto.brand}}</li>
-    <li>Descripción: {{producto.description}}</li>
+    <li>Descripción: {{producto.description | safe}}</li>
     <li>Precio: ${{producto.price}}</li>
     <li>Stock: {{producto.stock}}</li>
     <li>Creado: {{producto.created_at}}</li>
+   {% if producto.image %} <li>Imagen: <img src="{{producto.image.url}}" alt="{{producto.title}}" width = "150"></li> {% endif %} 
 </ul>
 {% endblock main %}

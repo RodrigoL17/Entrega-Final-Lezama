@@ -11,7 +11,7 @@
  <a href="{% url 'crear_producto' %}"><button>Crear producto</button></a>
 <ul>    
   {% for producto in productos %}
-  <li>{{producto.title}} - ${{producto.price}} | <a href={% url 'editar_producto' producto.id %}>Editar</a> | <a href={% url 'eliminar_producto' producto.id %}>Eliminar</a> | <a href={% url 'detalle_producto' producto.id %}>Ver detalles</a> </li>
+  <li>{% if producto.image  %}<img src={{producto.image.url}} alt={{producto.title}} width = "80">{% endif %} - {{producto.title}} - ${{producto.price}} | <a href={% url 'editar_producto' producto.id %}>Editar</a> | <a href={% url 'eliminar_producto' producto.id %}>Eliminar</a> | <a href={% url 'detalle_producto' producto.id %}>Ver detalles</a> </li>
   {% endfor %}
 </ul>
 {% else %}

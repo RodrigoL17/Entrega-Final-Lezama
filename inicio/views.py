@@ -35,7 +35,7 @@ def productos(request):
 class CrearProducto(LoginRequiredMixin, CreateView):
     model = Producto
     template_name = "inicio/crear_producto.html"
-    fields = ["title", "brand", "description", "price", "stock", "created_at"]
+    fields = ["title", "brand", "description", "price", "stock", "created_at", "image"]
     success_url = reverse_lazy("productos")
 
 
@@ -51,6 +51,7 @@ def crear_producto(request):
             price = info_limpia.get("price")
             stock = info_limpia.get("stock")
             created_at = info_limpia.get("created_at")
+            image = info_limpia.get("image")
 
             producto = Producto(
                 title=title,
@@ -59,6 +60,7 @@ def crear_producto(request):
                 price=price,
                 stock=stock,
                 created_at=created_at,
+                image=image,
             )
             producto.save()
             return redirect("productos")
@@ -85,7 +87,7 @@ def eliminar_producto(request, producto_id):
 class EditarProducto(LoginRequiredMixin, UpdateView):
     model = Producto
     template_name = "inicio/editar_producto.html"
-    fields = ["title", "brand", "description", "price", "stock", "created_at"]
+    fields = ["title", "brand", "description", "price", "stock", "created_at", "image"]
     success_url = reverse_lazy("productos")
 
 @login_required
@@ -93,7 +95,7 @@ def editar_producto(request, producto_id):
     producto_a_actualizar = Producto.objects.get(id=producto_id)
 
     if request.method == "POST":
-        formulario = EditarProductoFormulario(request.POST)
+        formulario = EditarProductoFormulario(request.POST, request.FILES)
         if formulario.is_valid():
             info_nueva = formulario.cleaned_data
 
@@ -103,7 +105,10 @@ def editar_producto(request, producto_id):
             producto_a_actualizar.price = info_nueva.get("price")
             producto_a_actualizar.stock = info_nueva.get("stock")
             producto_a_actualizar.created_at = info_nueva.get("created_at")
-
+            producto_a_actualizar.image = info_nueva.get("image")
+            
+            print(producto_a_actualizar.image)
+            
             producto_a_actualizar.save()
             return redirect("productos")
         else:
@@ -118,6 +123,7 @@ def editar_producto(request, producto_id):
             "price": producto_a_actualizar.price,
             "stock": producto_a_actualizar.stock,
             "created_at": producto_a_actualizar.created_at,
+            "image": producto_a_actualizar.image
         }
     )
     return render(request, "inicio/editar_producto.html", {"form": formulario})
@@ -131,6 +137,9 @@ class DetalleProducto(DetailView):
 def detalle_producto(request, producto_id):
     producto = Producto.objects.get(id=producto_id)
     return render(request, "inicio/detalle_producto.html", {"producto": producto})
+
+def about (request):
+    return render(request, "inicio/about.html")
 
 
 # def reviews(request):

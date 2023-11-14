@@ -1,18 +1,19 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from ckeditor.fields import RichTextField
 
 
 class Producto(models.Model):
     title = models.CharField(max_length=50)
     brand = models.CharField(max_length=50)
-    description = models.TextField()
-    # imgage = models.ImageField(upload_to="images/", null=True, blank=True)
+    description = RichTextField()
+    image = models.ImageField(upload_to="products_images", null=True, blank=True)
     created_at = models.DateField()
     stock = models.IntegerField()
     price = models.DecimalField(decimal_places=2, max_digits=10, default=0)
 
     def __str__(self):
-        return f"{self.id} - {self.title} - {self.brand} -{self.description} - {self.price} - {self.stock} - {self.created_at}"
+        return f"{self.id} - {self.image} - {self.title} - {self.brand} - {self.description} - {self.price} - {self.stock} - {self.created_at}"
 
 
 class Review(models.Model):
